@@ -1,0 +1,125 @@
+USE rmartinez4_workspace;
+
+CREATE TABLE PART2 (
+	PID CHAR(3) NOT NULL,
+    Pname VARCHAR(40),
+    Color VARCHAR(20),
+    Weight NUMERIC(5,2),
+    Pcity VARCHAR(20),
+    Quantity INTEGER,
+    DesignDate DATE,
+    constraint primary key (PID)
+);
+
+USE rmartinez4_workspace;
+
+CREATE TABLE SUPPLIER (
+	SID CHAR(2) NOT NULL,
+    Sname VARCHAR(50),
+    Status NUMERIC,
+    Scity VARCHAR(20),
+    CONSTRAINT PRIMARY KEY (SID)
+);
+
+SHOW TABLES;
+
+CREATE TABLE SUP_PART (
+	SPID CHAR(4) NOT NULL,
+	PID CHAR(2) NOT NULL,
+    SID CHAR(2) NOT NULL, 
+    Quantity INTEGER, 
+    CONSTRAINT PRIMARY KEY (SPID),
+	CONSTRAINT FOREIGN KEY (PID) REFERENCES PART (PID),
+	CONSTRAINT FOREIGN KEY (SID) REFERENCES SUPPLIER (SID)
+);
+
+SHOW TABLES;
+
+ALTER TABLE SUPPLIER
+ADD Sstate CHAR(2);
+
+DESCRIBE SUPPLIER;
+
+ALTER TABLE SUPPLIER
+ADD Scountry VARCHAR(50);
+
+ALTER TABLE SUPPLIER
+MODIFY Status NUMERIC(6,2);
+
+
+ALTER TABLE SUPPLIER
+MODIFY Status INTEGER;
+
+ALTER TABLE SUPPLIER
+CHANGE COLUMN Status SupStatus INTEGER;
+
+DESCRIBE SUPPLIER;
+
+ALTER TABLE SUPPLIER
+CHANGE COLUMN SupStatus Status INTEGER;
+
+/* Comment */
+
+INSERT INTO SUPPLIER
+VALUES (
+    'S1',
+    'Smith',
+    20,
+    'Tucson',
+    'AZ',
+    'USA' );
+
+SELECT * FROM SUPPLIER;
+
+INSERT INTO SUPPLIER
+VALUES (
+    'S2',
+    'Jones',
+    10,
+    'Phoenix',
+    'AZ',
+    'USA' );
+    Use Instruction;
+    
+    SELECT SID, Status, Scity
+    FROM SUPPLIER
+    WHERE Scity = 'Paris'; 
+    
+    SELECT PID, Pname, Color
+    FROM PART
+    WHERE Color = 'Red';
+    
+    /*Ownership*/
+SELECT S.Scity AS City, Sname
+FROM SUPPLIER S
+WHERE Scity='Paris';
+
+SELECT COUNT(SID)
+FROM SUPPLIER;
+
+SELECT COUNT(PID)
+FROM SUP_PART;    
+
+SELECT PID
+FROM SUP_PART;
+
+SELECT DISTINCT PID
+FROM SUP_PART;
+
+SELECT COUNT(DISTINCT PID)
+FROM SUP_PART;
+
+SELECT Status
+FROM SUPPLIER;
+
+SELECT  AVG(Status)
+FROM SUPPLIER;
+
+USE rmartinez4_workspace;
+CREATE TABLE TRICK (
+    TrickID    CHAR(4) NOT NULL,
+    TrickDescr VARCHAR(25) NOT NULL,
+    CONSTRAINT PRIMARY KEY (TrickID)
+);
+
+    
